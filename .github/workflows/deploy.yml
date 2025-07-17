@@ -1,0 +1,38 @@
+name: dbt CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dbt-test-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+      ENV: ${{ secrets.ENV }}
+      DATABRICKS_SCHEMA: ${{ secrets.DATABRICKS_SCHEMA }}
+      DATABRICKS_ORGANIZATION: ${{ secrets.DATABRICKS_ORGANIZATION }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Deploy Databricks Job
+        run: |
+          source venv/bin/activate
+          python scripts/deploy_job.py --job-file jobs/airport_pipeline.json --debug
