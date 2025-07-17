@@ -30,3 +30,27 @@ models:
           combination_of_columns:
             - country_name
             - runway_type
+  - name: fct_country_airport_rankings
+    description: >
+      This model ranks countries by the number of airports and identifies the 
+      top 3 and bottom 10 countries by airport count.
+    columns:
+      - name: country_code
+        description: Code of the country.
+        tests:
+          - not_null
+
+      - name: country_name
+        description: Name of the country.
+        tests:
+          - not_null
+
+      - name: airport_count
+        description: Total number of airports in the country.
+        tests:
+          - not_null
+
+      - name: rank_category
+        description: Rank category assigned as either 'top_3' or 'bottom_10'.
+        tests:
+          - not_null

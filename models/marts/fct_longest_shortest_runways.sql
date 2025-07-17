@@ -3,6 +3,7 @@
 WITH source AS (
     SELECT * FROM {{ ref('int_runway_airport_country') }}
 ),
+-- Only consider countries that have 2 or more runways
 valid_country_counts AS (
     SELECT
         iso_country,
@@ -11,6 +12,7 @@ valid_country_counts AS (
     GROUP BY iso_country
     HAVING COUNT(*) >= 2
 ),
+-- Filter out countries with fewer than 2 runways
 filtered_source AS (
     SELECT s.*
     FROM source s
