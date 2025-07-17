@@ -82,14 +82,3 @@ Feel free to contribute to this project by submitting issues or pull requests.
 6. Copy `profiles.yml` to ~/.dbt/ (on Macbook)
 7. Import dbt dependency modules: `dbt deps`
 8. Test your connection: `dbt debug --profiles-dir ~/.dbt/`
-
-Note that if a larger cluster than `small` is needed for dev dbt work and a larger cluster is created, ensure the
-cluster's Spark Config configuration contains:
-
-```
-spark.mart.serverName {{secrets/mart/serverName}}
-spark.mart.adminUsername {{secrets/mart/sqlAdministratorUsername}}
-spark.mart.adminPassword {{secrets/mart/sqlAdministratorPassword}}
-```
-
-Else the cluster will not be able to connect to the SQL Server instance.
