@@ -1,0 +1,11 @@
+{
+    "name": "airports_pipeline",
+    "commands": [
+        "dbt build -s +fct_country_airport_rankings +fct_longest_shortest_runways"
+    ],
+    "schedule": {
+        "quartz_cron_expression": "0 0 2 ? * MON-FRI", 
+        "timezone_id": "UTC"
+    },
+    "max_retries": 0
+}

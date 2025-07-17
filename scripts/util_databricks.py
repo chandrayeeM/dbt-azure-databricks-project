@@ -43,33 +43,11 @@ def call_db_api_get(endpoint: str):
     req_url = url + endpoint
     return requests.get(req_url, headers=headers)
 
-def list_cluster_policies():
-    endpoint = "2.0/policies/clusters/list"
-    return call_db_api_get(endpoint)
-    
-def create_cluster(payload: dict):
-    endpoint = "2.0/clusters/create"
-    return call_db_api_post(endpoint, payload)
-
-def update_cluster(payload: dict):
-    if 'cluster_id' not in payload:
-        return False, 'cluster_id required'
-    endpoint = "2.0/clusters/edit"
-    return call_db_api_post(endpoint, payload)
 
 def list_pools():
     endpoint = "2.0/instance-pools/list"
     return call_db_api_get(endpoint)
 
-
-def get_pool_id(pool_name):
-    r, data = list_pools()
-    if not r:
-        raise Exception(data)
-    for ex_pool in data["instance_pools"]:
-        if ex_pool["instance_pool_name"] == pool_name:
-            return ex_pool["instance_pool_id"]
-    raise Exception(f"pool '{pool_name}' not found")
     
 def list_clusters():
     endpoint = "2.0/clusters/list"
@@ -94,18 +72,3 @@ def run_job(job_id):
     }
     return call_db_api_post(endpoint, payload)
 
-def cancel_job_run(job_id):
-    endpoint = "2.1/jobs/runs/cancel-all"
-    payload = {
-        "job_id": job_id
-    }
-    return call_db_api_post(endpoint, payload)
-
-def put_secret(key, value):
-    endpoint = "2.0/secrets/put"
-    payload = {
-        "scope": "mart",
-        "key": key,
-        "string_value": value
-    }
-    return call_db_api_post(endpoint, payload)
