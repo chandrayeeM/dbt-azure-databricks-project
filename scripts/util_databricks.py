@@ -3,7 +3,7 @@ import json
 import os
 import traceback
 
-databricks_token = os.environ.get("DATABRICKS_AAD_TOKEN")
+databricks_token = os.environ.get("DATABRICKS_TOKEN")
 HOST = os.environ.get("DATABRICKS_HOST")
 
 def error_handler(func):
