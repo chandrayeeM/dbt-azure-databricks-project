@@ -35,4 +35,4 @@ jobs:
       - name: Deploy Databricks Job
         run: |
           source venv/bin/activate
-          python scripts/deploy_job.py --job-file jobs/airport_pipeline.json --debug
+          python scripts/deploy_jobs.py --job-file jobs/airport_pipeline.json --debug
