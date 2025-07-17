@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: my_source
+    description: "This is the source data for the DBT project."
+    database: my_database
+    schema: my_schema
+    tables:
+      - name: my_table
+        description: "This table contains the raw data used for transformations."
+      - name: my_view
+        description: "This view is used for aggregating data."

@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: fct_longest_shortest_runways
+    description: >
+      For each country with valid runway data, this model shows the longest and shortest runway details (length, width, airport name).
+    columns:
+      - name: country_name
+        tests:
+          - not_null
+
+      - name: airport_name
+        tests:
+          - not_null
+
+      - name: length_ft
+        tests:
+          - not_null
+
+      - name: width_ft
+      
+      - name: runway_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['longest', 'shortest']
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - country_name
+            - runway_type

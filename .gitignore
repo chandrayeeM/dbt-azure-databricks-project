@@ -1,0 +1,15 @@
+.user.yml
+target/
+dbt_modules/
+dbt_packages/
+logs/
+.idea/**
+.env
+**.DS_Store
+venv/*
+.vscode/*
+.dbt/
+**.pyc
+package-lock.yml
+newvenv
+venv
