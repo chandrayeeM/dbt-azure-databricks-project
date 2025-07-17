@@ -3,7 +3,14 @@ name: dbt CI/CD
 on:
   push:
     branches:
-      - main
+      - main    # Auto-trigger for production
+
+  workflow_dispatch:    # Manual trigger for any branch
+    inputs:
+      env:
+        description: 'Deployment environment (dev or prod)'
+        required: false
+        default: 'dev'
 
 jobs:
   dbt-test-deploy:
